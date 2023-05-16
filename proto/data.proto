@@ -1,0 +1,31 @@
+syntax = "proto3";
+package data;
+
+enum Exchange {
+  BINANCE = 0;
+  OKEX = 1;
+  KUCOIN = 2;
+}
+
+enum MarketType {
+  SPOT = 0;
+  FUTURE = 1;
+}
+
+message SubDataRequest {
+  string symbol = 1;
+  Exchange exchange = 2;
+  MarketType market_type = 3;
+}
+
+message SubDataResponse {
+  bool successful = 1;
+  string message = 2;
+}
+
+service SubData {
+    rpc SubKlineData(SubDataRequest) returns (SubDataResponse);
+    // rpc SubDepthData(SubDataRequest) returns (SubDataResponse);
+    // rpc SubTickData(SubDataRequest) returns (SubDataResponse);
+    // rpc SubFullData(SubDataRequest) returns (SubDataResponse);
+}
